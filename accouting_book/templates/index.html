@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}记录流水帐{% endblock %}
+{% block source %}
+<link rel="stylesheet" href="/static/css/style.css" />
+{% endblock %}
+{% block body %}
+<ul>
+    <li>
+        <label for="date" class="label">日期：</label>
+        <input type="datetime-local" id="date" />   
+    </li>
+    <li>
+        <label for="product" class="label">商品：</label>
+        <input type="text" id="product" />   
+    </li>
+    <li>
+        <label for="price" class="label">价格：</label>
+        <input type="text" id="price" />
+    </li>
+    <li>
+        <span class="label">参与人：</span>
+        {% for u in users %}
+        <input type="radio" id="u-{{u.id}}" /> <label for="u-{{u.id}}">{{u.name}}</label>
+        {% endfor %}
+        <input type="text" placehold="添加参与人" />
+    </li>
+    <li>
+        <label for="store" class="label">商店：</label>
+        {% if stores|length %}
+        <select id="storeList">
+            {% for s in stores %}
+            <option id="{{s.id}}">{{s.name}}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
+        <input type="text" id="store" placehold="添加商店" />
+    </li>
+    <li>
+        <label for="item" class="label">项目：</label>
+        {% if events|length %}
+        <select id="itemList">
+            {% for e in events %}
+            <option id="{{e.id}}">{{e.name}}</option>
+            {% endfor %}
+        </select>
+        {% endif %}
+        <input type="text" id="item" placehold="添加项目" />
+    </li>
+    <li>
+        <label for="info" class="label">备注：</label>
+        <textarea name="" id="" cols="30" rows="10" id="info"></textarea>
+    </li>
+</ul>
+{% endblock %}
